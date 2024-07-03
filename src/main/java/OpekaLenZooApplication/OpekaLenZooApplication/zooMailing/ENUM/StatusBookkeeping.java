@@ -1,6 +1,6 @@
 package OpekaLenZooApplication.OpekaLenZooApplication.zooMailing.ENUM;
 
-public enum StatusCurator {
-    NO_MAIL,
+public enum StatusBookkeeping {
     OK,
+    ALREADY_SEND
 }

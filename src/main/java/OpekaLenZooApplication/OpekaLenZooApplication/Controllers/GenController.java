@@ -10,7 +10,10 @@ import OpekaLenZooApplication.OpekaLenZooApplication.SortByComp.SortService;
 import OpekaLenZooApplication.OpekaLenZooApplication.UpdateDB2.Exeption.NotFoundDataForContract;
 import OpekaLenZooApplication.OpekaLenZooApplication.UpdateDB2.Exeption.UncorrectedVisitPerson;
 import OpekaLenZooApplication.OpekaLenZooApplication.UpdateDB2.ServiceDB;
+import OpekaLenZooApplication.OpekaLenZooApplication.zooMailing.ENUM.StatusBookkeeping;
+import OpekaLenZooApplication.OpekaLenZooApplication.zooMailing.ENUM.StatusCurator;
 import OpekaLenZooApplication.OpekaLenZooApplication.zooMailing.H2Repository;
+import OpekaLenZooApplication.OpekaLenZooApplication.zooMailing.POJO.BookkeepingExist;
 import OpekaLenZooApplication.OpekaLenZooApplication.zooMailing.POJO.CuratorsBookkeeping;
 import OpekaLenZooApplication.OpekaLenZooApplication.zooMailing.ServiceMail;
 import javafx.collections.FXCollections;
@@ -89,8 +92,6 @@ public class GenController {
 
     @FXML
     private CheckBox updateDbCheck;
-    @FXML
-    private CheckBox checkBoxNew;
     @FXML
     private ChoiceBox<String> chBox;
     @FXML
@@ -223,17 +224,17 @@ public class GenController {
 
         for (CuratorsBookkeeping curatorsBookkeeping : curatorsBookkeepingList) {
             String name = curatorsBookkeeping.curator().getName();
-            switch (curatorsBookkeeping.status()) {
-                case NO_MAIL -> {
-                    curratorsArea.appendText("(0)-");
-                    showAlert(name + " " + Constants.NOT_MAIL_MESSAGE);
-                }
-                case ALREADY_SEND -> curratorsArea.appendText("(1)-");
-                case IN_BLACK_LIST -> {
-                    continue;
-                }
+            if (Objects.requireNonNull(curatorsBookkeeping.status()) == StatusCurator.NO_MAIL) {
+                curratorsArea.appendText("(0)-");
+                showAlert(name + " " + Constants.NOT_MAIL_MESSAGE);
             }
-            curratorsArea.appendText(name + " " + curatorsBookkeeping.bookkeeping() + "\n");
+            curratorsArea.appendText(name + "\n");
+            for (BookkeepingExist bookkeepingExist : curatorsBookkeeping.bookkeeping()) {
+                if (bookkeepingExist.status() == StatusBookkeeping.ALREADY_SEND) {
+                    curratorsArea.appendText("      (1)-");
+                }
+                curratorsArea.appendText(bookkeepingExist.bookkeeping() + "\n");
+            }
         }
     }
 
@@ -280,14 +281,6 @@ public class GenController {
             return;
         }
         new Thread(new RenamePNGFiles(this, path, chBoxString)).start();
-    }
-
-    private boolean isEmptyField(String str) {
-        if (str.equals("")) {
-            showAlert("Пустое поле");
-            return true;
-        }
-        return false;
     }
 
     private void showAlert(String text) {

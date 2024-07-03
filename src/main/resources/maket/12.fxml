@@ -26,7 +26,6 @@
                         <Button fx:id="cr" layoutX="652.0" layoutY="182.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="205.0" text="Создать договор" />
                         <TextField fx:id="txtcr" layoutX="525.0" layoutY="182.0" prefHeight="25.0" prefWidth="112.0" promptText="Номер договора" />
                   <ChoiceBox fx:id="chBox" layoutX="857.0" layoutY="67.0" prefHeight="25.0" prefWidth="201.0" />
-                  <CheckBox fx:id="checkBoxNew" layoutX="1065.0" layoutY="64.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="106.0" text="Только новые" />
                   <Button fx:id="deleteScanButton" layoutX="998.0" layoutY="112.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="116.0" text="Удалить сканы" />
                     </children></AnchorPane>
             </content>
