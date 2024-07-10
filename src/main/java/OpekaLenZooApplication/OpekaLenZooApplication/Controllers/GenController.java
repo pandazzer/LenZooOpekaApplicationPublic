@@ -233,7 +233,7 @@ public class GenController {
                 if (bookkeepingExist.status() == StatusBookkeeping.ALREADY_SEND) {
                     curratorsArea.appendText("      (1)-");
                 }
-                curratorsArea.appendText(bookkeepingExist.bookkeeping() + "\n");
+                curratorsArea.appendText("      " + bookkeepingExist.bookkeeping() + "\n");
             }
         }
     }

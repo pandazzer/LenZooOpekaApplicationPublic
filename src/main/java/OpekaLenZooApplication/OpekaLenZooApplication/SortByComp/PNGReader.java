@@ -27,7 +27,6 @@ public class PNGReader {
         } catch (TesseractException e) {
             e.printStackTrace();
         }
-        System.out.println(result.toLowerCase());
         return result.toLowerCase();
     }
 

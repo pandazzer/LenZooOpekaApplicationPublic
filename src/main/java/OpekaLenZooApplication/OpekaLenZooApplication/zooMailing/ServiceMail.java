@@ -70,7 +70,7 @@ public class ServiceMail {
     private List<File> getListFilePath(CuratorsBookkeeping curatorsBookkeeping) {
         List<File> listFiles = new ArrayList<>();
         for (BookkeepingExist bookkeeping : curatorsBookkeeping.bookkeeping()) {
-            if (bookkeeping.status() == StatusBookkeeping.ALREADY_SEND) continue;
+            if (bookkeeping.status() != StatusBookkeeping.OK) continue;
             File curBookkeeping = new File(curatorsBookkeeping.curator().getPath() + "\\" + bookkeeping.bookkeeping());
             for (File file : Objects.requireNonNull(curBookkeeping.listFiles())) {
                 if (file.getName().equals("Thumbs.db")) {
