@@ -10,8 +10,8 @@ public interface Constants {
     String spreadsheetId = "19IJPlFe8AR8p02SnhIyTup029njfG7ZEJAWAYUN8R7A";
     //1UvNOnXH-wlaL9QHEW82uHBX2rX_VCejm9N95h9SNYhE - test
     //19IJPlFe8AR8p02SnhIyTup029njfG7ZEJAWAYUN8R7A - prod
-    String password = System.getenv("passwordEmail");
-    String tokenDaData = "Token " + System.getenv("tokenDaData");
+    String password = System.getProperty("passwordEmail");
+    String tokenDaData = "Token " + System.getProperty("tokenDaData");
     String NEW_CONTRACTS_PATH = "Z:/Опека/Договоры/";
     String login = "opeka@spbzoo.ru";
     String userDB = "sa";

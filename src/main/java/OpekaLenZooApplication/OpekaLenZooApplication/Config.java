@@ -38,7 +38,7 @@ public class Config {
         envMap.put("pathDB", Constants.pathDB);
         envMap.put("curatorsDirectoryPath", Constants.curatorsDirectoryPath);
         envMap.put("spreadsheetId", Constants.spreadsheetId);
-        envMap.put("tokenDaData", System.getenv("tokenDaData"));
+        envMap.put("tokenDaData", System.getProperty("tokenDaData"));
         for (Map.Entry<String, String> env : envMap.entrySet()) {
             if (env.getValue() == null || env.getValue().isEmpty()) {
                 throw new EnvironmentNullException(env.getKey() + " = null or empty");
