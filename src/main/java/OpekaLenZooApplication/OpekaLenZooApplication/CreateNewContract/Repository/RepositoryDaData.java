@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 @Component
 public class RepositoryDaData {
 
@@ -21,6 +22,7 @@ public class RepositoryDaData {
         CompanyFromDaData companyFromDaData = gson.fromJson(dataString, CompanyFromDaData.class);
         return reduceInCompanyShort(companyFromDaData);
     }
+
     private String getDataFromINN(String inn) {
         try {
             URL url = new URL(Constants.urlDaData);
@@ -42,7 +44,8 @@ public class RepositoryDaData {
         }
 
     }
-    private CompanyShort reduceInCompanyShort(CompanyFromDaData companyFromDaData){
+
+    private CompanyShort reduceInCompanyShort(CompanyFromDaData companyFromDaData) {
         CompanyFromDaData.SuggestionData data = companyFromDaData.getSuggestions()[0].getData();
 
         String fullCompanyName = data.getName().getFullWithOpf();
@@ -51,22 +54,27 @@ public class RepositoryDaData {
         String okpo = data.getOkpo();
         String urAdress = data.getAddress().getValue();
         boolean isLegal = data.getType().equals("LEGAL");
-        String name = null;
-        String post = null;
+        String name = "";
+        String post = "";
         String kpp = null;
-        if (isLegal){
-            name = data.getManagement().getName();
-            post = data.getManagement().getPost();
+
+        if (isLegal) {
+            CompanyFromDaData.Management management = data.getManagement();
+            if (management != null) {
+                name = management.getName();
+                post = management.getPost();
+            }
             kpp = data.getKpp();
         }
         String status = data.getState().getStatus();
-        return new CompanyShort(name,post, fullCompanyName, shortCompanyName, kpp, ogrn,
+        return new CompanyShort(name, post, fullCompanyName, shortCompanyName, kpp, ogrn,
                 okpo, urAdress, isLegal, status);
     }
+
     private String streamToString(InputStream in) throws IOException {
         StringBuilder out = new StringBuilder();
         byte[] b = new byte[4096];
-        for (int n; (n = in.read(b)) != -1;) {
+        for (int n; (n = in.read(b)) != -1; ) {
             out.append(new String(b, 0, n));
         }
         return out.toString();
