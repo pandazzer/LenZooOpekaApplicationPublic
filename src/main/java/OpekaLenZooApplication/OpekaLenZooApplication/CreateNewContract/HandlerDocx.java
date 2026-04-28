@@ -21,7 +21,7 @@ public abstract class HandlerDocx {
 
     public HandlerDocx(){
         MONTH.add("");
-        MONTH.add("янарь");
+        MONTH.add("январь");
         MONTH.add("февраль");
         MONTH.add("март");
         MONTH.add("апрель");
